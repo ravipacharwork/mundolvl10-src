@@ -34,7 +34,7 @@ env:
 jobs:
   deobf:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
 
@@ -63,12 +63,13 @@ jobs:
           echo "GHIDRA_HOME=$GHIDRA" >> "$GITHUB_ENV"
           git clone --depth 1 https://github.com/xiaojianbang8888/OLLVM_Deobfuscator.git
 
-      - name: Export function boundaries (Ghidra)
+      - name: Analyze + export functions (Ghidra, full coverage)
         run: |
           mkdir -p ghproj
           "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" orig \
             -import "$PWD/$SO_PATH" \
             -scriptPath "$PWD/ci/ghidra" \
+            -postScript DefineFunctions.java \
             -postScript ExportFunctions.java "$PWD/functions.txt" \
             -deleteProject
           echo "functions: $(grep -c '^0x' functions.txt)"
@@ -78,16 +79,17 @@ jobs:
         run: |
           python ci/ollvm_deobf_driver.py \
             "$SO_PATH" functions.txt libxdfw8yegr_deobf.so \
-            --tool OLLVM_Deobfuscator --timeout 120 --log ollvm_deobf.log
+            --tool OLLVM_Deobfuscator --timeout 180 --log ollvm_deobf.log
           cp "$SO_PATH" libxdfw8yegr_orig.so
           ls -la libxdfw8yegr_*.so
 
-      - name: Decompile deobfuscated .so (Ghidra)
+      - name: Decompile deobfuscated .so (Ghidra, full coverage)
         run: |
           mkdir -p ghidra-c ghproj2
           "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj2" deobf \
             -import "$PWD/libxdfw8yegr_deobf.so" \
             -scriptPath "$PWD/ci/ghidra" \
+            -postScript DefineFunctions.java \
             -postScript DecompileAll.java "$PWD/ghidra-c" \
             -deleteProject
           echo "C files: $(find ghidra-c -name '*.c' | wc -l)"
@@ -131,12 +133,12 @@ jobs:
         continue-on-error: true
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq libboost-all-dev cmake g++
+          sudo apt-get install -y -qq libboost-all-dev cmake ninja-build g++
           git clone --depth 1 https://github.com/ayesc9000/snowman-archive.git snowman
           cd snowman
-          mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Release .. || cmake ..
-          make -j2 nocode sol || make -j2 nocode || make -j2
+          mkdir -p build && cd build
+          cmake -G Ninja ../src -DCMAKE_BUILD_TYPE=Release
+          ninja -k 50 nocode || ninja -k 50
           cd "$GITHUB_WORKSPACE"
           NOCODE=$(find "$PWD/snowman" -name nocode -type f | head -1)
           echo "nocode: $NOCODE"
