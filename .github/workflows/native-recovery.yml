@@ -1,0 +1,225 @@
+name: Native recovery (Arkari/OLLVM)
+
+# Maximum-effort recovery of the protected native library libxdfw8yegr.so.
+#
+# The .so was compiled with a clang built from KomiMoe/Arkari (Goron/Hikari/
+# OLLVM lineage), so it carries control-flow flattening (fla), indirect
+# branches/calls/globals (indbr/icall/indgv) and string encryption (cse).
+#
+# Pipeline:
+#   1. deobf   - Ghidra exports every function boundary; the Unicorn-based
+#                OLLVM_Deobfuscator patches flattened control flow back.
+#   2. decompile - RetDec + Snowman + Ghidra each decompile the deobfuscated
+#                .so into separate C trees for cross-reading.
+#   3. strings - best-effort recovery of encrypted strings/constants.
+#   4. package - bundle everything as native-recovered.
+#
+# Original C/C++ source cannot be reconstructed exactly; this is the maximum
+# physically achievable recovery.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "ci/native_strings.py"
+      - "ci/ollvm_deobf_driver.py"
+      - "ci/ghidra/ExportFunctions.java"
+      - "source/library/src/main/jniLibs/**"
+      - ".github/workflows/native-recovery.yml"
+
+env:
+  SO_PATH: source/library/src/main/jniLibs/arm64-v8a/libxdfw8yegr.so
+
+jobs:
+  deobf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Unicorn/Capstone/Keystone
+        run: pip install unicorn capstone keystone-engine
+
+      - name: Fetch Ghidra + deobfuscator
+        run: |
+          GURL=$(curl -s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest \
+            | grep -o 'https://[^"]*ghidra_[0-9.]*_PUBLIC_[0-9]*\.zip' | head -1)
+          echo "ghidra: $GURL"
+          curl -sSL -o ghidra.zip "$GURL"
+          unzip -q ghidra.zip
+          GHIDRA=$(find "$PWD" -maxdepth 1 -name 'ghidra_*_PUBLIC' -type d | head -1)
+          echo "GHIDRA_HOME=$GHIDRA" >> "$GITHUB_ENV"
+          git clone --depth 1 https://github.com/xiaojianbang8888/OLLVM_Deobfuscator.git
+
+      - name: Export function boundaries (Ghidra)
+        run: |
+          mkdir -p ghproj
+          "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" orig \
+            -import "$PWD/$SO_PATH" \
+            -scriptPath "$PWD/ci/ghidra" \
+            -postScript ExportFunctions.java "$PWD/functions.txt" \
+            -deleteProject
+          echo "functions: $(grep -c '^0x' functions.txt)"
+          head -5 functions.txt
+
+      - name: Deobfuscate control flow (OLLVM_Deobfuscator)
+        run: |
+          python ci/ollvm_deobf_driver.py \
+            "$SO_PATH" functions.txt libxdfw8yegr_deobf.so \
+            --tool OLLVM_Deobfuscator --timeout 120 --log ollvm_deobf.log
+          cp "$SO_PATH" libxdfw8yegr_orig.so
+          ls -la libxdfw8yegr_*.so
+
+      - name: Decompile deobfuscated .so (Ghidra)
+        run: |
+          mkdir -p ghidra-c ghproj2
+          "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj2" deobf \
+            -import "$PWD/libxdfw8yegr_deobf.so" \
+            -scriptPath "$PWD/ci/ghidra" \
+            -postScript DecompileAll.java "$PWD/ghidra-c" \
+            -deleteProject
+          echo "C files: $(find ghidra-c -name '*.c' | wc -l)"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-deobf
+          path: |
+            libxdfw8yegr_deobf.so
+            libxdfw8yegr_orig.so
+            functions.txt
+            ollvm_deobf.log
+            ghidra-c/**
+          if-no-files-found: warn
+
+  decompile:
+    needs: deobf
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download deobfuscated binary
+        uses: actions/download-artifact@v4
+        with:
+          name: native-deobf
+
+      - name: Fetch + run RetDec
+        run: |
+          curl -sSL -o retdec.tar.xz \
+            https://github.com/avast/retdec/releases/download/v5.0/RetDec-v5.0-Linux-Release.tar.xz
+          tar -xf retdec.tar.xz
+          RETDEC=$(find "$PWD" -name 'retdec-decompiler' | head -1)
+          echo "retdec: $RETDEC"
+          mkdir -p retdec-c
+          "$RETDEC" libxdfw8yegr_deobf.so -o retdec-c/libxdfw8yegr_deobf.c || \
+            echo "retdec rc=$?"
+
+      - name: Build + run Snowman
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libboost-all-dev cmake g++
+          git clone --depth 1 https://github.com/ayesc9000/snowman-archive.git snowman
+          cd snowman
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release .. || cmake ..
+          make -j2 nocode sol || make -j2 nocode || make -j2
+          cd "$GITHUB_WORKSPACE"
+          NOCODE=$(find "$PWD/snowman" -name nocode -type f | head -1)
+          echo "nocode: $NOCODE"
+          mkdir -p snowman-c
+          "$NOCODE" --print-cxx=snowman-c/all.c libxdfw8yegr_deobf.so || \
+            echo "snowman rc=$?"
+
+      - name: Package decompiler trees
+        run: |
+          for d in ghidra-c retdec-c snowman-c; do
+            if [ -d "$d" ]; then zip -qr "$d.zip" "$d"; fi
+          done
+          ls -lh *.zip 2>/dev/null || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-decompilers
+          path: |
+            ghidra-c.zip
+            retdec-c.zip
+            snowman-c.zip
+            retdec-c/**
+            snowman-c/**
+          if-no-files-found: warn
+
+  strings:
+    needs: deobf
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download deobfuscated binary
+        uses: actions/download-artifact@v4
+        with:
+          name: native-deobf
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Unicorn/Capstone/Keystone
+        run: pip install unicorn capstone keystone-engine
+
+      - name: Recover strings (best effort)
+        continue-on-error: true
+        run: |
+          python ci/native_strings.py \
+            libxdfw8yegr_orig.so libxdfw8yegr_deobf.so strings || \
+            echo "native_strings rc=$?"
+          ls -la strings 2>/dev/null || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-strings
+          path: strings/**
+          if-no-files-found: warn
+
+  package:
+    needs: [deobf, decompile, strings]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: collected
+
+      - name: Assemble native-recovered
+        run: |
+          mkdir -p native-recovered
+          cp -r collected/* native-recovered/ 2>/dev/null || true
+          cp -f ci/RECOVERY.md native-recovered/RECOVERY.md
+          zip -qr native-recovered.zip native-recovered
+          ls -lh native-recovered.zip
+          find native-recovered -maxdepth 2 -type f | head -40
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-recovered
+          path: native-recovered.zip
+          if-no-files-found: warn
