@@ -1,0 +1,47 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  android.accounts.Account
+ *  android.accounts.IAccountAuthenticator
+ *  android.accounts.IAccountAuthenticatorResponse
+ *  android.accounts.IAccountManagerResponse
+ *  android.os.Bundle
+ */
+package top.bienvenido.date_24323;
+
+import android.accounts.Account;
+import android.accounts.IAccountAuthenticator;
+import android.accounts.IAccountAuthenticatorResponse;
+import android.accounts.IAccountManagerResponse;
+import android.os.Bundle;
+import top.bienvenido.date_24323.c9;
+
+public final class l3
+extends c9 {
+    public final /* synthetic */ Account \u7528\u6405\u62cc\u673a\u628a\u4f60\u5988\u7684\u9634\u6269\u4e00\u4e0b;
+    public final /* synthetic */ String \u6211\u7a7a\u964d\u4f60\u7239\u846c\u793c\u7528\u4f60\u5988\u5b50\u5bab\u5f39\u594f\u4e00\u66f2dj\u7248\u6c42\u4f5b\u4e3a\u4f60\u7239\u4ea1\u7075\u8d85\u5ea6;
+    public final /* synthetic */ Bundle \u8001\u5b50\u53ef\u662f\u51fa\u4e86\u540d\u7684\u4e2d\u56fd\u597d\u820c\u5934\u5f53\u5e74\u8001\u5b50\u4e00\u820c\u5934\u8214\u4f60\u5988\u7684\u4fe9\u5976\u5b50\u8214\u5b8c\u5976\u5b50\u518d\u8214\u9634\u8482\u628a\u4f60\u5988\u8c03\u6559\u50cf\u6761\u6bcd\u72d7\u4e00\u6837\u7684\u4e56\u4f60\u5988\u8fd8\u81ea\u613f\u8ba9\u8001\u5b50\u6bcf\u5929\u808f\u54e5\u7684\u9e21\u5df4\u808f\u7684\u8ba9\u4f60\u5988\u6bcf\u5929\u90fd\u8ddf\u6d3b\u5728\u5929\u5802\u4e00\u6837;
+
+    public l3(boolean bl, Account account, String string, Bundle bundle, IAccountManagerResponse iAccountManagerResponse, String string2, String string3) {
+        this.\u7528\u6405\u62cc\u673a\u628a\u4f60\u5988\u7684\u9634\u6269\u4e00\u4e0b = account;
+        this.\u6211\u7a7a\u964d\u4f60\u7239\u846c\u793c\u7528\u4f60\u5988\u5b50\u5bab\u5f39\u594f\u4e00\u66f2dj\u7248\u6c42\u4f5b\u4e3a\u4f60\u7239\u4ea1\u7075\u8d85\u5ea6 = string;
+        this.\u8001\u5b50\u53ef\u662f\u51fa\u4e86\u540d\u7684\u4e2d\u56fd\u597d\u820c\u5934\u5f53\u5e74\u8001\u5b50\u4e00\u820c\u5934\u8214\u4f60\u5988\u7684\u4fe9\u5976\u5b50\u8214\u5b8c\u5976\u5b50\u518d\u8214\u9634\u8482\u628a\u4f60\u5988\u8c03\u6559\u50cf\u6761\u6bcd\u72d7\u4e00\u6837\u7684\u4e56\u4f60\u5988\u8fd8\u81ea\u613f\u8ba9\u8001\u5b50\u6bcf\u5929\u808f\u54e5\u7684\u9e21\u5df4\u808f\u7684\u8ba9\u4f60\u5988\u6bcf\u5929\u90fd\u8ddf\u6d3b\u5728\u5929\u5802\u4e00\u6837 = bundle;
+        super(iAccountManagerResponse, string2, bl, true, string3, false, true);
+    }
+
+    @Override
+    public final void \u6211\u7a7a\u964d\u4f60\u7239\u846c\u793c\u7528\u4f60\u5988\u5b50\u5bab\u5f39\u594f\u4e00\u66f2dj\u7248\u6c42\u4f5b\u4e3a\u4f60\u7239\u4ea1\u7075\u8d85\u5ea6() {
+        IAccountAuthenticator iAccountAuthenticator = this.\u867d\u7136\u4e0d\u662f\u540c\u4e00\u65f6\u95f4\u4f46\u662f\u662f\u540c\u4e00\u4e2a\u4f60\u5988\u4f60\u7239\u6211\u518d\u6b21\u6311\u6218\u4e00\u628a\u5403\u9634\u7b2c;
+        if (iAccountAuthenticator != null) {
+            IAccountAuthenticator iAccountAuthenticator2 = iAccountAuthenticator;
+            l3 l32 = this;
+            iAccountAuthenticator = l32.\u7528\u6405\u62cc\u673a\u628a\u4f60\u5988\u7684\u9634\u6269\u4e00\u4e0b;
+            String string = l32.\u6211\u7a7a\u964d\u4f60\u7239\u846c\u793c\u7528\u4f60\u5988\u5b50\u5bab\u5f39\u594f\u4e00\u66f2dj\u7248\u6c42\u4f5b\u4e3a\u4f60\u7239\u4ea1\u7075\u8d85\u5ea6;
+            Bundle bundle = l32.\u8001\u5b50\u53ef\u662f\u51fa\u4e86\u540d\u7684\u4e2d\u56fd\u597d\u820c\u5934\u5f53\u5e74\u8001\u5b50\u4e00\u820c\u5934\u8214\u4f60\u5988\u7684\u4fe9\u5976\u5b50\u8214\u5b8c\u5976\u5b50\u518d\u8214\u9634\u8482\u628a\u4f60\u5988\u8c03\u6559\u50cf\u6761\u6bcd\u72d7\u4e00\u6837\u7684\u4e56\u4f60\u5988\u8fd8\u81ea\u613f\u8ba9\u8001\u5b50\u6bcf\u5929\u808f\u54e5\u7684\u9e21\u5df4\u808f\u7684\u8ba9\u4f60\u5988\u6bcf\u5929\u90fd\u8ddf\u6d3b\u5728\u5929\u5802\u4e00\u6837;
+            iAccountAuthenticator2.updateCredentials((IAccountAuthenticatorResponse)this, (Account)iAccountAuthenticator, string, bundle);
+            return;
+        }
+    }
+}
+

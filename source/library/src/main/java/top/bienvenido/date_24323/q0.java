@@ -61,8 +61,7 @@ public final class q0 implements s0 {
             this.f278.transact(7, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -78,8 +77,7 @@ public final class q0 implements s0 {
             this.f278.transact(8, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -98,14 +96,13 @@ public final class q0 implements s0 {
             parcelObtain.writeStrongBinder(iBinder);
             this.f278.transact(13, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.readString();
+            String strVal = Obtain.readString();
             Obtain.recycle();
             parcelObtain.recycle();
-            return Obtain;
+            return strVal;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -125,15 +122,14 @@ public final class q0 implements s0 {
             parcelObtain.writeString(str2);
             this.f278.transact(14, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.readInt();
-            boolean z = Obtain != 0;
+            int intVal = Obtain.readInt();
+            boolean z = intVal != 0;
             Obtain.recycle();
             parcelObtain.recycle();
             return z;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -150,8 +146,7 @@ public final class q0 implements s0 {
             this.f278.transact(15, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -170,15 +165,14 @@ public final class q0 implements s0 {
             parcelObtain.writeStrongBinder(iBinder);
             this.f278.transact(16, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.readInt();
-            boolean z = Obtain != 0;
+            int intVal = Obtain.readInt();
+            boolean z = intVal != 0;
             Obtain.recycle();
             parcelObtain.recycle();
             return z;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -194,8 +188,7 @@ public final class q0 implements s0 {
             this.f278.transact(17, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -213,15 +206,14 @@ public final class q0 implements s0 {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             this.f278.transact(19, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.readInt();
-            boolean z = Obtain != 0;
+            int intVal = Obtain.readInt();
+            boolean z = intVal != 0;
             Obtain.recycle();
             parcelObtain.recycle();
             return z;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -242,14 +234,13 @@ public final class q0 implements s0 {
             parcelObtain.writeInt(i);
             this.f278.transact(2, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = (Intent[]) Obtain.createTypedArray(Intent.CREATOR);
+            Intent[] obsVal = Obtain.createTypedArray(Intent.CREATOR);
             Obtain.recycle();
             parcelObtain.recycle();
-            return Obtain;
+            return obsVal;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -308,8 +299,7 @@ public final class q0 implements s0 {
             this.f278.transact(5, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -328,14 +318,13 @@ public final class q0 implements s0 {
             parcelObtain.writeLong(j);
             this.f278.transact(9, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+            ArrayList listVal = Obtain.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
             Obtain.recycle();
             parcelObtain.recycle();
-            return Obtain;
+            return listVal;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -355,14 +344,13 @@ public final class q0 implements s0 {
             parcelObtain.writeInt(i);
             this.f278.transact(10, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.createTypedArrayList(ActivityManager.RecentTaskInfo.CREATOR);
+            ArrayList listVal = Obtain.createTypedArrayList(ActivityManager.RecentTaskInfo.CREATOR);
             Obtain.recycle();
             parcelObtain.recycle();
-            return Obtain;
+            return listVal;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -386,8 +374,7 @@ public final class q0 implements s0 {
             Obtain.recycle();
         } catch (Throwable th) {
             parcelObtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -422,14 +409,13 @@ public final class q0 implements s0 {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             this.f278.transact(18, parcelObtain, Obtain, 0);
             Obtain.readException();
-            Obtain = Obtain.readString();
+            String strVal = Obtain.readString();
             Obtain.recycle();
             parcelObtain.recycle();
-            return Obtain;
+            return strVal;
         } catch (Throwable th) {
             Obtain.recycle();
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 
@@ -445,8 +431,7 @@ public final class q0 implements s0 {
             this.f278.transact(20, Obtain, null, 1);
             Obtain.recycle();
         } catch (Throwable th) {
-            th.recycle();
-            throw Obtain;
+                        throw th;
         }
     }
 }
