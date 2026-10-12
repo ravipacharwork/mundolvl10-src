@@ -31,17 +31,21 @@ cp /tmp/all_sources.txt /tmp/sources.txt
 KEEP_BEFORE=$(wc -l < /tmp/sources.txt)
 
 CP="$KOTLIN_JAR:$CLASSES_JAR"
+ERRLOG="$ROOT/ci-javac-errors.log"
+: > "$ERRLOG"
 ok=0
 MAX=80
 for i in $(seq 1 $MAX); do
   rm -rf /tmp/cls; mkdir -p /tmp/cls
-  if javac -nowarn -proc:none -source 8 -target 8 \
+  if javac -nowarn -proc:none -Xmaxerrs 100000 -source 8 -target 8 \
         -bootclasspath "$ANDROID_JAR" -cp "$CP" \
         -d /tmp/cls @/tmp/sources.txt > /tmp/javac.log 2>&1; then
     ok=1
     echo "== COMPILE OK after $i iteration(s) =="
     break
   fi
+  echo "==== iteration $i errors ====" >> "$ERRLOG"
+  cat /tmp/javac.log >> "$ERRLOG"
   grep -oE '^/[^:]+\.java' /tmp/javac.log | sort -u > /tmp/bad.txt
   n=$(wc -l < /tmp/bad.txt)
   if [ "$n" -eq 0 ]; then

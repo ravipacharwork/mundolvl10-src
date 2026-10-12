@@ -85,6 +85,6 @@ jobs:
           name: build-report
           path: |
             source/library/libs/fallback.jar
-            ci-javac.log
+            ci-javac-errors.log
             source/library/excluded/
           if-no-files-found: warn

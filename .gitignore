@@ -11,4 +11,5 @@ source/library/build/
 source/library/.gradle/
 mundolvl10-source.zip
 ci-javac.log
+ci-javac-errors.log
 .kotlin/
