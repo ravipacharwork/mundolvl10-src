@@ -49,7 +49,7 @@ jobs:
           curl -sSL -o cfr.jar \
             https://repo1.maven.org/maven2/org/benf/cfr/0.152/cfr-0.152.jar
           curl -sSL -o procyon.jar \
-            https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-decompiler/0.6.0/procyon-decompiler-0.6.0.jar
+            https://github.com/mstrobel/procyon/releases/download/v0.6.0/procyon-decompiler-0.6.0.jar
           curl -sSL -o jadx.zip \
             https://github.com/skylot/jadx/releases/download/v1.5.1/jadx-1.5.1.zip
           unzip -q jadx.zip -d jadx
