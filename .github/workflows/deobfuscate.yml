@@ -1,0 +1,101 @@
+name: Deobfuscate engine classes
+
+# Best-effort, analysis-grade pipeline: the obfuscated engine classes use
+# non-ASCII class names that crash filename-based decompilers. We let ProGuard
+# rename every class (keeping the public SDK packages intact) to stable ASCII
+# names and then decompile with Vineflower/CFR/JADX. Artifacts are sources for
+# reading/reverse-engineering; the shipping AAR is produced by build-aar.yml.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "ci/**"
+      - "original/**"
+      - ".github/workflows/deobfuscate.yml"
+
+jobs:
+  deobf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Android platform 34 (hidden APIs, for ProGuard libs)
+        run: |
+          SDKM="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKM" ]; then SDKM="$ANDROID_SDK_ROOT/cmdline-tools/16.0/bin/sdkmanager"; fi
+          yes | "$SDKM" "platforms;android-34" >/dev/null
+          curl -sSL -o "$ANDROID_SDK_ROOT/platforms/android-34/android.jar" \
+            https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-34/android.jar
+
+      - name: Fetch tools
+        run: |
+          curl -sSL -o vineflower.jar \
+            https://github.com/Vineflower/vineflower/releases/download/1.10.1/vineflower-1.10.1.jar
+          curl -sSL -o cfr.jar \
+            https://repo1.maven.org/maven2/org/benf/cfr/0.152/cfr-0.152.jar
+          curl -sSL -o jadx.zip \
+            https://github.com/skylot/jadx/releases/download/v1.5.1/jadx-1.5.1.zip
+          unzip -q jadx.zip -d jadx
+          PURL=$(curl -s https://api.github.com/repos/Guardsquare/proguard/releases/latest \
+            | grep -o 'https://[^"]*proguard-[0-9.]*\.zip' | head -1)
+          echo "proguard: $PURL"
+          curl -sSL -o proguard.zip "$PURL"
+          unzip -q proguard.zip -d proguard
+
+      - name: Rename classes to ASCII (ProGuard)
+        run: |
+          cat > pg.pro <<EOF
+          -injars original/classes.jar
+          -outjars renamed.jar
+          -libraryjars $ANDROID_SDK_ROOT/platforms/android-34/android.jar
+          -dontshrink
+          -dontoptimize
+          -dontwarn
+          -dontnote
+          -dontusemixedcaseclassnames
+          -keepattributes *
+          -keep class net_62v.** { *; }
+          -keep class top.bienvenido.mundo.** { *; }
+          -keepclassmembers,allowoptimization class ** { *; }
+          -printmapping proguard-mapping.txt
+          EOF
+          java -cp "proguard/lib/*" proguard.ProGuard @pg.pro | tail -20
+          echo "renamed classes:"; unzip -l renamed.jar | grep -c '\.class'
+          echo "sample mapping:"; head -8 proguard-mapping.txt
+
+      - name: Decompile renamed.jar (Vineflower / CFR / JADX)
+        run: |
+          java -jar vineflower.jar --silent=true renamed.jar vine-src        || echo "vineflower rc=$?"
+          java -jar cfr.jar renamed.jar --outputdir cfr-src --silent true   || echo "cfr rc=$?"
+          jadx/bin/jadx -d jadx-src --no-res renamed.jar                    || echo "jadx rc=$?"
+          echo "vine files: $(find vine-src -name '*.java' 2>/dev/null | wc -l)"
+          echo "cfr  files: $(find cfr-src  -name '*.java' 2>/dev/null | wc -l)"
+          echo "jadx files: $(find jadx-src -name '*.java' 2>/dev/null | wc -l)"
+
+      - name: Package
+        run: |
+          zip -qr vine-src.zip vine-src proguard-mapping.txt 2>/dev/null || true
+          zip -qr cfr-src.zip cfr-src 2>/dev/null || true
+          zip -qr jadx-src.zip jadx-src 2>/dev/null || true
+          ls -lh *.zip
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deobfuscated-sources
+          path: |
+            vine-src.zip
+            cfr-src.zip
+            jadx-src.zip
+            proguard-mapping.txt
+          if-no-files-found: warn
