@@ -23,11 +23,11 @@ public abstract class w5 {
                 URI uriCreate = URI.create(str);
                 proxyInfoBuildDirectProxy = ProxyInfo.buildDirectProxy(uriCreate.getHost(), uriCreate.getPort(), CollectionsKt.listOf(new String[]{"*.cn", "localhost", "127.*", "[::1]", "0.0.0.0", "[::0]"}));
             }
-            obj = Result.constructor-impl(Integer.valueOf(w3.f375.mo87(new Intent("android.intent.action.PROXY_CHANGE").addFlags(603979776).putExtra("android.intent.extra.PROXY_INFO", proxyInfoBuildDirectProxy).setPackage(str2), str3)));
+            obj = Integer.valueOf(w3.f375.mo87(new Intent("android.intent.action.PROXY_CHANGE").addFlags(603979776).putExtra("android.intent.extra.PROXY_INFO", proxyInfoBuildDirectProxy).setPackage(str2), str3));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = ResultKt.createFailure(th);
         }
-        Result.exceptionOrNull-impl(obj);
+        Object unused = obj;
     }
 }

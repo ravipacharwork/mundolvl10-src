@@ -274,12 +274,12 @@ public final class w3 extends d0 {
             u5.f353xaa30c2c7 = str;
             w3Var.getClass();
             m548(str, (String) null, (String) null);
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = Unit.INSTANCE;
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = ResultKt.createFailure(th);
         }
-        Result.exceptionOrNull-impl(obj);
+        Object unused = obj;
     }
 
     static {
@@ -424,12 +424,12 @@ public final class w3 extends d0 {
             String str4 = str2;
             w3Var.getClass();
             m548(str, str4, str3);
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = Unit.INSTANCE;
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = ResultKt.createFailure(th);
         }
-        Result.exceptionOrNull-impl(obj);
+        Object unused = obj;
     }
 
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰, reason: contains not printable characters */
