@@ -19,13 +19,15 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Install Android platform 34
+      - name: Install Android platform 34 (hidden APIs)
         run: |
           SDKM="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
           if [ ! -x "$SDKM" ]; then SDKM="$ANDROID_SDK_ROOT/cmdline-tools/16.0/bin/sdkmanager"; fi
           yes | "$SDKM" "platforms;android-34" "build-tools;34.0.0" >/dev/null
-          echo "installed:"
-          ls "$ANDROID_SDK_ROOT/platforms" "$ANDROID_SDK_ROOT/build-tools"
+          echo "replacing android.jar with AOSP hidden-api build (for com.android.internal.*)"
+          curl -sSL -o "$ANDROID_SDK_ROOT/platforms/android-34/android.jar" \
+            https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-34/android.jar
+          ls -lh "$ANDROID_SDK_ROOT/platforms/android-34/android.jar"
 
       - name: Set up Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
