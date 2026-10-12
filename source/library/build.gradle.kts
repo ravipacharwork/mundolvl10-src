@@ -31,3 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
+dependencies {
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+}

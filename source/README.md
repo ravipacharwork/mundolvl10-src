@@ -21,13 +21,17 @@ consumer-proguard-rules.pro   keep rules shipped with the AAR
 - `jni/arm64-v8a/libxdfw8yegr.so` 874 KB (stripped, PAC/BTI, CFG-flattened)
 - `proguard.txt` (keep rules), empty `R.txt`, binary `AndroidManifest.xml`
 
-## To build on a PC
-1. Open this folder in Android Studio or run:
-   ```
-   ./gradlew :library:assembleRelease
-   ```
-2. Requires JDK 17+ and Android SDK `compileSdk 34`. AGP 8.5.1 will download
-   the rest.
+## To build
+- **GitHub Actions (no PC needed):** push this repo; the workflow
+  `.github/workflows/build-aar.yml` builds `:library:assembleRelease` on an
+  `ubuntu-latest` runner (JDK 17 + Android SDK, Gradle 8.7) and uploads the
+  resulting AAR + build reports as artifacts. Re-run from the Actions tab.
+- **Locally on a PC:** open this folder in Android Studio or run:
+  ```
+  ./gradlew :library:assembleRelease
+  ```
+  Requires JDK 17+ and Android SDK `compileSdk 34`. AGP 8.5.1 will download
+  the rest.
 
 ## Caveats
 - All classes come from a decompiler, not original source. R8 stripped names:

@@ -1,0 +1,47 @@
+name: Build AAR source
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.7
+
+      - name: Build library AAR
+        run: gradle --no-daemon --console=plain :library:assembleRelease --stacktrace
+        working-directory: source
+        continue-on-error: true
+
+      - name: Upload AAR artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mundolvl10-library-release
+          path: source/library/build/outputs/aar/*.aar
+
+      - name: Upload build reports
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: build-reports
+          path: source/library/build/reports/
