@@ -35,11 +35,21 @@ def load_tool(tool_dir):
 
 
 def read_functions(path):
+    """Return (funcs, image_base).  Ghidra loads PIE ELFs at a non-zero image
+    base (e.g. 0x100000), so addresses must be rebased to ELF vaddrs."""
     funcs = []
+    image_base = 0
     with open(path) as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith("#"):
+            if not line:
+                continue
+            if line.startswith("#"):
+                if "image_base" in line:
+                    try:
+                        image_base = int(line.split("image_base")[1].strip(), 16)
+                    except ValueError:
+                        pass
                 continue
             parts = line.split()
             if len(parts) < 2 or not parts[0].startswith("0x"):
@@ -52,7 +62,7 @@ def read_functions(path):
             name = parts[2] if len(parts) > 2 else ""
             funcs.append((addr, size, name))
     funcs.sort()
-    return funcs
+    return funcs, image_base
 
 
 def main():
@@ -61,6 +71,8 @@ def main():
     ap.add_argument("functions")
     ap.add_argument("output")
     ap.add_argument("--tool", default="OLLVM_Deobfuscator")
+    ap.add_argument("--base", type=lambda x: int(x, 16), default=None,
+                    help="override image base to subtract (default: from file)")
     ap.add_argument("--min-size", type=int, default=24)
     ap.add_argument("--max-size", type=int, default=2000000)
     ap.add_argument("--timeout", type=int, default=120)
@@ -73,8 +85,13 @@ def main():
     elf = od.ELFLoader(args.input)
     patcher = od.PatchGenerator(elf.data)
 
-    funcs = read_functions(args.functions)
-    print(f"[driver] {len(funcs)} functions from {args.functions}")
+    funcs, image_base = read_functions(args.functions)
+    if args.base is not None:
+        image_base = args.base
+    if image_base:
+        funcs = [(addr - image_base, size, name) for addr, size, name in funcs]
+    print(f"[driver] image base 0x{image_base:x}; "
+          f"{len(funcs)} functions from {args.functions}")
 
     signal.signal(signal.SIGALRM, _alarm)
 

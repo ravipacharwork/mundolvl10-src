@@ -11,7 +11,9 @@ public class ExportFunctions extends GhidraScript {
     public void run() throws Exception {
         String[] args = getScriptArgs();
         String out = (args != null && args.length > 0) ? args[0] : "functions.txt";
+        long imageBase = currentProgram.getImageBase().getOffset();
         PrintWriter w = new PrintWriter(new FileWriter(out));
+        w.printf("# image_base 0x%x%n", imageBase);
         w.println("# start_addr size name");
         FunctionIterator it = currentProgram.getFunctionManager().getFunctions(true);
         int n = 0;
@@ -24,6 +26,7 @@ public class ExportFunctions extends GhidraScript {
             n++;
         }
         w.close();
+        println("image base: 0x" + Long.toHexString(imageBase));
         println("exported functions: " + n + " -> " + out);
     }
 }
