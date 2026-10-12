@@ -27,3 +27,12 @@
 ## Open Questions
 - Does REA accept `.aar` for android tools, or only `.apk`? → Only `.apk`; use JADX directly.
 - Does JADX run cleanly under Termux JDK 21 on aarch64? → Yes (1.5.6, 3 class errors tolerated).
+
+## 2026-10-12 — Full Source Reconstruction pipeline DONE (all green)
+- New `.github/workflows/full-re.yml`: ProGuard ASCII rename → 4 decompilers (Vineflower 519, CFR ~339, JADX, Procyon 446 files all on renamed.jar) + Ghidra headless native decompile. Jython dep removed — script rewritten in Java (`ci/ghidra/DecompileAll.java`); project dir must be `mkdir -p` before analyzeHeadless.
+- Procyon 0.6.0 jar URL fix: use GitHub release `procyon-decompiler-0.6.0.jar` (shaded, has Main-Class) — Maven `compilertools` lacks DecompilerDriver.
+- Ghidra 12.1.4 decompiled **838 functions** → 839 .c files (32 KB .so fully pseudo-C'd).
+- CI runs all success; artifacts: java-decompiled-sources (2MB), native-decompiled-c (307KB).
+- Delivered to `/storage/emulated/0/Download/mundolvl10/`: `native-c/` (839 .c), `decompiled/` (vine/cfr/procyon/jadx zips + deobf-mapping.txt), AAR, `source/`.
+- Deobfuscate.yml removed (superseded). Jar renames: top/bienvenido/a.* preserved (attempted too).
+- NEXT if user wants: generate `SOURCES.md` index; try more builds (build-aar still green separately).
