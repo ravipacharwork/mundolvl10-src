@@ -137,11 +137,11 @@ jobs:
       - name: Ghidra headless decompile all functions
         run: |
           SO=source/library/src/main/jniLibs/arm64-v8a/libxdfw8yegr.so
-          mkdir -p native-c
+          mkdir -p native-c ghproj
           "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" mundolvl \
             -import "$PWD/$SO" \
             -scriptPath "$PWD/ci/ghidra" \
-            -postScript DecompileAll.py "$PWD/native-c" \
+            -postScript DecompileAll.java "$PWD/native-c" \
             -deleteProject
           echo "C files: $(find native-c -name '*.c' | wc -l)"
           ls -lh native-c | head
