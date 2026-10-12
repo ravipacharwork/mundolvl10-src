@@ -1,0 +1,47 @@
+name: Probe (temp)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - ".github/workflows/probe.yml"
+      - "ci/ghidra/DefineFunctions.java"
+      - "ci/ghidra/DumpRange.java"
+
+env:
+  SO_PATH: source/library/src/main/jniLibs/arm64-v8a/libxdfw8yegr.so
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Fetch Ghidra
+        run: |
+          GURL=$(curl -s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest \
+            | grep -o 'https://[^"]*ghidra_[0-9.]*_PUBLIC_[0-9]*\.zip' | head -1)
+          echo "ghidra: $GURL"
+          curl -sSL -o ghidra.zip "$GURL"
+          unzip -q ghidra.zip
+          GHIDRA=$(find "$PWD" -maxdepth 1 -name 'ghidra_*_PUBLIC' -type d | head -1)
+          echo "GHIDRA_HOME=$GHIDRA" >> "$GITHUB_ENV"
+
+      - name: DefineFunctions + dump
+        run: |
+          mkdir -p ghproj
+          "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" probe \
+            -import "$PWD/$SO_PATH" \
+            -scriptPath "$PWD/ci/ghidra" \
+            -postScript DumpRange.java 0x17ff00 0x180200 \
+            -postScript DefineFunctions.java \
+            -postScript DumpRange.java 0x17ff00 0x180200 \
+            -deleteProject
