@@ -1,0 +1,159 @@
+name: Full source reconstruction
+
+# Reconstructs the AAR to the maximum extent possible:
+#   * Java/Kotlin bytecode -> renamed to ASCII (ProGuard) then decompiled with
+#     Vineflower + CFR + Procyon + JADX (four independent decompilers).
+#   * native libxdfw8yegr.so -> Ghidra headless decompiles every function to C.
+#
+# NOTE: the .so is an obfuscated compiled binary; its original C/C++ source is
+# not recoverable. Ghidra C output is the closest achievable "source".
+#
+# The shipping, working AAR is produced separately by build-aar.yml.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "ci/**"
+      - "original/**"
+      - ".github/workflows/full-re.yml"
+
+jobs:
+  java:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Android platform 34 (hidden APIs, for ProGuard libs)
+        run: |
+          SDKM="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKM" ]; then SDKM="$ANDROID_SDK_ROOT/cmdline-tools/16.0/bin/sdkmanager"; fi
+          yes | "$SDKM" "platforms;android-34" >/dev/null
+          curl -sSL -o "$ANDROID_SDK_ROOT/platforms/android-34/android.jar" \
+            https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-34/android.jar
+          curl -sSL -o kotlin-stdlib.jar \
+            https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24.jar
+
+      - name: Fetch Java decompilers + ProGuard
+        run: |
+          curl -sSL -o vineflower.jar \
+            https://github.com/Vineflower/vineflower/releases/download/1.10.1/vineflower-1.10.1.jar
+          curl -sSL -o cfr.jar \
+            https://repo1.maven.org/maven2/org/benf/cfr/0.152/cfr-0.152.jar
+          curl -sSL -o procyon.jar \
+            https://repo1.maven.org/maven2/org/bitbucket/mstrobel/procyon-decompiler/0.6.0/procyon-decompiler-0.6.0.jar
+          curl -sSL -o jadx.zip \
+            https://github.com/skylot/jadx/releases/download/v1.5.1/jadx-1.5.1.zip
+          unzip -q jadx.zip -d jadx
+          PURL=$(curl -s https://api.github.com/repos/Guardsquare/proguard/releases/latest \
+            | grep -o 'https://[^"]*proguard-[0-9.]*\.zip' | head -1)
+          curl -sSL -o proguard.zip "$PURL"
+          unzip -q proguard.zip -d proguard
+          ls -la *.jar
+
+      - name: Rename non-ASCII classes (ProGuard)
+        run: |
+          PGJAR=$(find proguard -name 'proguard.jar' | head -1)
+          cat > pg.pro <<EOF
+          -injars original/classes.jar
+          -outjars renamed.jar
+          -libraryjars $ANDROID_SDK_ROOT/platforms/android-34/android.jar
+          -libraryjars kotlin-stdlib.jar
+          -dontshrink
+          -dontoptimize
+          -dontwarn
+          -dontnote
+          -dontusemixedcaseclassnames
+          -keepattributes *
+          -keep class net_62v.** { *; }
+          -keep class top.bienvenido.mundo.** { *; }
+          -keepclassmembers,allowoptimization class ** { *; }
+          -printmapping proguard-mapping.txt
+          EOF
+          java -cp "$PGJAR" proguard.ProGuard @pg.pro
+          echo "classes in renamed.jar: $(unzip -l renamed.jar | grep -c '\.class')"
+
+      - name: Decompile (Vineflower / CFR / Procyon / JADX)
+        run: |
+          java -jar vineflower.jar --silent=true renamed.jar vine-src       || echo "vineflower rc=$?"
+          java -jar cfr.jar renamed.jar --outputdir cfr-src --silent true  || echo "cfr rc=$?"
+          java -jar procyon.jar -o procyon-src renamed.jar                 || echo "procyon rc=$?"
+          jadx/bin/jadx -d jadx-src --no-res renamed.jar                   || echo "jadx rc=$?"
+          for d in vine-src cfr-src procyon-src jadx-src; do
+            echo "$d: $(find $d -name '*.java' 2>/dev/null | wc -l) files"
+          done
+
+      - name: Package Java sources
+        run: |
+          for d in vine-src cfr-src procyon-src jadx-src; do
+            if [ -d "$d" ]; then zip -qr "$d.zip" "$d"; fi
+          done
+          cp proguard-mapping.txt deobf-mapping.txt
+          ls -lh *.zip
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: java-decompiled-sources
+          path: |
+            vine-src.zip
+            cfr-src.zip
+            procyon-src.zip
+            jadx-src.zip
+            deobf-mapping.txt
+          if-no-files-found: warn
+
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Fetch Ghidra
+        run: |
+          GURL=$(curl -s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest \
+            | grep -o 'https://[^"]*ghidra_[0-9.]*_PUBLIC_[0-9]*\.zip' | head -1)
+          echo "ghidra: $GURL"
+          curl -sSL -o ghidra.zip "$GURL"
+          unzip -q ghidra.zip
+          GHIDRA=$(find "$PWD" -maxdepth 1 -name 'ghidra_*_PUBLIC' -type d | head -1)
+          echo "GHIDRA_HOME=$GHIDRA" >> "$GITHUB_ENV"
+          "$GHIDRA/support/analyzeHeadless" 2>&1 | head -3 || true
+
+      - name: Ghidra headless decompile all functions
+        run: |
+          SO=source/library/src/main/jniLibs/arm64-v8a/libxdfw8yegr.so
+          mkdir -p native-c
+          "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" mundolvl \
+            -import "$PWD/$SO" \
+            -scriptPath "$PWD/ci/ghidra" \
+            -postScript DecompileAll.py "$PWD/native-c" \
+            -deleteProject
+          echo "C files: $(find native-c -name '*.c' | wc -l)"
+          ls -lh native-c | head
+
+      - name: Package native + RE notes
+        run: |
+          zip -qr native-decompiled.zip native-c
+          ls -lh native-decompiled.zip
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-decompiled-c
+          path: native-decompiled.zip
+          if-no-files-found: warn
