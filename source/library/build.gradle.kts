@@ -34,4 +34,19 @@ android {
 
 dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+
+    // Classes that could not be reconstructed from source are shipped as the
+    // original bytecode (built by ci/compile_and_exclude.sh).
+    val fallbackJar = layout.projectDirectory.file("libs/fallback.jar").asFile
+    if (fallbackJar.exists()) {
+        implementation(files(fallbackJar))
+    }
+}
+
+android {
+    packaging {
+        resources {
+            excludes += setOf("META-INF/*.kotlin_module")
+        }
+    }
 }

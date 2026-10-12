@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -24,10 +24,25 @@ jobs:
           SDKM="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
           if [ ! -x "$SDKM" ]; then SDKM="$ANDROID_SDK_ROOT/cmdline-tools/16.0/bin/sdkmanager"; fi
           yes | "$SDKM" "platforms;android-34" "build-tools;34.0.0" >/dev/null
-          echo "replacing android.jar with AOSP hidden-api build (for com.android.internal.*)"
+          echo "replacing android.jar with AOSP hidden-api build (com.android.internal.*)"
           curl -sSL -o "$ANDROID_SDK_ROOT/platforms/android-34/android.jar" \
             https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-34/android.jar
           ls -lh "$ANDROID_SDK_ROOT/platforms/android-34/android.jar"
+
+      - name: Fetch kotlin-stdlib
+        run: |
+          curl -sSL -o kotlin-stdlib.jar \
+            https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24.jar
+          ls -lh kotlin-stdlib.jar
+
+      - name: Hybrid source compile (exclude un-reconstructable files)
+        run: |
+          chmod +x ci/compile_and_exclude.sh
+          ci/compile_and_exclude.sh \
+            "$ANDROID_SDK_ROOT/platforms/android-34/android.jar" \
+            "$PWD/kotlin-stdlib.jar" \
+            "$PWD/original/classes.jar"
+          cp /tmp/javac.log ci-javac.log || true
 
       - name: Set up Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
@@ -37,18 +52,39 @@ jobs:
       - name: Build library AAR
         run: gradle --no-daemon --console=plain :library:assembleRelease --stacktrace
         working-directory: source
-        continue-on-error: true
 
-      - name: Upload AAR artifact
+      - name: Package complete source
+        if: always()
+        run: |
+          zip -qr mundolvl10-source.zip \
+            source/library/src/main/java \
+            source/library/src/main/AndroidManifest.xml \
+            source/library/src/main/jniLibs \
+            source/library/consumer-proguard-rules.pro \
+            source/library/excluded 2>/dev/null || true
+          ls -lh mundolvl10-source.zip || true
+
+      - name: Upload working AAR
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: mundolvl10-library-release
           path: source/library/build/outputs/aar/*.aar
 
-      - name: Upload build reports
+      - name: Upload complete source
         uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
-          name: build-reports
-          path: source/library/build/reports/
+          name: mundolvl10-source-zip
+          path: mundolvl10-source.zip
+
+      - name: Upload fallback + reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-report
+          path: |
+            source/library/libs/fallback.jar
+            ci-javac.log
+            source/library/excluded/
+          if-no-files-found: warn
