@@ -151,7 +151,7 @@ public abstract class v5 extends ContentProvider {
             }
         } catch (Exception unused) {
         }
-        ?? r0 = h6.f130;
+        h6 r0 = h6.f130;
         synchronized (r0) {
             try {
                 h6.f143.invoke();

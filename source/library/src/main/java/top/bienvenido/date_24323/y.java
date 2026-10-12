@@ -55,7 +55,7 @@ public final class y implements b0 {
     /* JADX INFO: renamed from: 你妈今晚去偷电线杆子你爸去找电箱之后结合疯狂爆电让后在拿电线杆子ziwei完事还要去加油站在自己piyan和逼里灌油拿着打火机狂撩自己把自己变成内燃机 */
     public final AuthenticatorDescription[] mo26xaa30c2c7() {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoAccountManagerService");
             this.f416.transact(3, parcelObtain, Obtain, 0);
@@ -80,7 +80,7 @@ public final class y implements b0 {
     /* JADX INFO: renamed from: 虽然不是同一时间但是是同一个你妈你爹我再次挑战一把吃阴第 */
     public final Account[] mo27() {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoAccountManagerService");
             parcelObtain.writeString(null);
@@ -107,7 +107,7 @@ public final class y implements b0 {
     /* JADX INFO: renamed from: 肏你妈小屄崽子你真没见过黑社会哈肏你妈的敢不敢跟我比划比划肏你妈肏你妈敢不敢比划什么叫做黑手肏你妈的你 */
     public final Account[] mo28(String str) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoAccountManagerService");
             parcelObtain.writeString(str);
@@ -155,7 +155,7 @@ public final class y implements b0 {
     @Override // top.bienvenido.date_24323.b0
     /* JADX INFO: renamed from: 要不要把你妈卵子扣出来给你做寿司吃 */
     public final void mo31(IBinder iBinder, String str, String[] strArr) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAccountManagerService");
@@ -182,7 +182,7 @@ public final class y implements b0 {
     /* JADX INFO: renamed from: 孙立军禁播你妈下体乃是正义之举此举引得无数爱国人士冲进你妈下体一顿打砸从此你妈卖逼也没用好口碑了 */
     public final HashMap mo49(String str, String str2) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoAccountManagerService");
             parcelObtain.writeString(str);
@@ -251,7 +251,7 @@ public final class y implements b0 {
     @Override // top.bienvenido.date_24323.b0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo30(IBinder iBinder, String str, String[] strArr) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAccountManagerService");
@@ -370,7 +370,7 @@ public final class y implements b0 {
     @Override // top.bienvenido.date_24323.b0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo34(String str, String str2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAccountManagerService");
@@ -539,7 +539,7 @@ public final class y implements b0 {
     @Override // top.bienvenido.date_24323.b0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo42(IBinder iBinder, String str, boolean z) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAccountManagerService");
@@ -594,7 +594,7 @@ public final class y implements b0 {
     @Override // top.bienvenido.date_24323.b0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo45(IBinder iBinder, String str, String str2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAccountManagerService");

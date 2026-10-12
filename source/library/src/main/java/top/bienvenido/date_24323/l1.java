@@ -95,8 +95,8 @@ public abstract class l1 {
             String str = packageInfoM253.packageName;
             w3.f375.mo88(str, (String) null);
             r5.f290.getClass();
-            ?? r0 = (e2) r5.f291.get(str);
-            ?? r13 = r0 != 0 ? r0 : (k4) r5.f292.get(str);
+            e2 r0 = (e2) r5.f291.get(str);
+            k4 r13 = r0 != 0 ? r0 : (k4) r5.f292.get(str);
             if (r13 != 0) {
                 o9Var2 = r13.f201;
             } else {
@@ -211,7 +211,7 @@ public abstract class l1 {
         int i;
         try {
             try {
-                ?? c0031x7011f1e3 = new C0031x7011f1e3(0);
+                C0031x7011f1e3 c0031x7011f1e3 = new C0031x7011f1e3(0);
                 if (file.isDirectory()) {
                     File[] fileArrListFiles = file.listFiles();
                     if (fileArrListFiles == null) {

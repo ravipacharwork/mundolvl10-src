@@ -34,7 +34,7 @@ public final class c0 implements f0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰, reason: contains not printable characters */
     public final IBinder mo75(String str, String str2, ProviderInfo[] providerInfoArr, String[] strArr, int i) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoActivityManagerService");
             parcelObtain.writeString(str);
@@ -136,7 +136,7 @@ public final class c0 implements f0 {
     /* JADX INFO: renamed from: 你不知道你妈张个大嘴劈个小腿下面还流着咸盐水吗弟弟, reason: contains not printable characters */
     public final ArrayList mo83(int i) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoActivityManagerService");
             parcelObtain.writeInt(i);
@@ -162,7 +162,7 @@ public final class c0 implements f0 {
     /* JADX INFO: renamed from: 你爹我一顿暴打揍的你瞎妈的子宫打成稀巴烂浆糊然后把你蠢妈的肠子都拉出来做成美味可口的香肠大发慈悲喂给路边的那些流浪汉吃, reason: contains not printable characters */
     public final String[] mo84(int i) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoActivityManagerService");
             parcelObtain.writeInt(i);
@@ -184,7 +184,7 @@ public final class c0 implements f0 {
     @Override // top.bienvenido.date_24323.f0
     /* JADX INFO: renamed from: 老子实在看不过你妈的脑残狗逼样子直接把你妈用5毛钱卖到埃塞俄比亚国家大妓院请那些非洲部落小喽啰来享受你妈逼的黑阴逼, reason: contains not printable characters */
     public final void mo925(String str) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoActivityManagerService");
@@ -205,7 +205,7 @@ public final class c0 implements f0 {
     @Override // top.bienvenido.date_24323.f0
     /* JADX INFO: renamed from: 你爹我一顿暴打揍的你瞎妈的子宫打成稀巴烂浆糊然后把你蠢妈的肠子都拉出来做成美味可口的香肠大发慈悲喂给路边的那些流浪汉吃, reason: contains not printable characters */
     public final void mo88(String str, String str2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoActivityManagerService");
             Obtain.writeString(str);
@@ -227,7 +227,7 @@ public final class c0 implements f0 {
     /* JADX INFO: renamed from: 你不知道你妈张个大嘴劈个小腿下面还流着咸盐水吗弟弟, reason: contains not printable characters */
     public final boolean mo89(String str, String str2) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoActivityManagerService");
             parcelObtain.writeString(str);
@@ -255,7 +255,7 @@ public final class c0 implements f0 {
     /* JADX INFO: renamed from: 我要送你妈一朵花哈哈哈开玩笑的我哪来的花你哪来的妈, reason: contains not printable characters */
     public final boolean mo80(IBinder iBinder) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoActivityManagerService");
             parcelObtain.writeStrongBinder(iBinder);
@@ -278,7 +278,7 @@ public final class c0 implements f0 {
     @Override // top.bienvenido.date_24323.f0
     /* JADX INFO: renamed from: 要不要把你妈卵子扣出来给你做寿司吃, reason: contains not printable characters */
     public final void mo86(IBinder iBinder) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoActivityManagerService");
             Obtain.writeStrongBinder(iBinder);
@@ -319,7 +319,7 @@ public final class c0 implements f0 {
     @Override // top.bienvenido.date_24323.f0
     /* JADX INFO: renamed from: 你爹我一顿暴打揍的你瞎妈的子宫打成稀巴烂浆糊然后把你蠢妈的肠子都拉出来做成美味可口的香肠大发慈悲喂给路边的那些流浪汉吃, reason: contains not printable characters */
     public final void mo90() {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoActivityManagerService");
             this.f32.transact(16, Obtain, null, 1);
@@ -448,7 +448,7 @@ public final class c0 implements f0 {
     @Override // top.bienvenido.date_24323.f0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰, reason: contains not printable characters */
     public final void mo93(String str, String str2, String str3) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoActivityManagerService");

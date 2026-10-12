@@ -53,7 +53,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 你妈在万人广场卖逼你废物爹不仅不阻止反而跟你妈一起跟天下人民普天同庆你每晚草你妈生龙活虎你妈疼的呲牙咧嘴你妈逼上的阴齿都满足不了你这杂种的狂野性需求啊草你妈 */
     public final void mo334xb7bf1d91(String str, String str2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeString(str);
@@ -71,7 +71,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 你不知道你妈张个大嘴劈个小腿下面还流着咸盐水吗弟弟 */
     public final void mo335(IBinder iBinder) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeStrongBinder(iBinder);
@@ -92,7 +92,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 虽然不是同一时间但是是同一个你妈你爹我再次挑战一把吃阴第 */
     public final String mo340(IBinder iBinder) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeStrongBinder(iBinder);
@@ -118,7 +118,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 要不要把你妈卵子扣出来给你做寿司吃 */
     public final boolean mo341(String str, String str2) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeString(str);
@@ -142,7 +142,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 你妈今晚去偷电线杆子你爸去找电箱之后结合疯狂爆电让后在拿电线杆子ziwei完事还要去加油站在自己piyan和逼里灌油拿着打火机狂撩自己把自己变成内燃机 */
     public final void mo342xaa30c2c7(String str, String str2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeString(str);
@@ -164,7 +164,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 你爹我一顿暴打揍的你瞎妈的子宫打成稀巴烂浆糊然后把你蠢妈的肠子都拉出来做成美味可口的香肠大发慈悲喂给路边的那些流浪汉吃 */
     public final boolean mo343(IBinder iBinder) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeStrongBinder(iBinder);
@@ -187,7 +187,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 我要送你妈一朵花哈哈哈开玩笑的我哪来的花你哪来的妈 */
     public final void mo344(String str) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeString(str);
@@ -208,7 +208,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 我要送你妈一朵花哈哈哈开玩笑的我哪来的花你哪来的妈 */
     public final boolean mo346() {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             this.f278.transact(19, parcelObtain, Obtain, 0);
@@ -234,7 +234,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final Intent[] mo329(IBinder iBinder, Intent[] intentArr, int i) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeStrongBinder(iBinder);
@@ -300,7 +300,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo332(IBinder iBinder, IBinder iBinder2) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeStrongBinder(iBinder);
@@ -322,7 +322,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final List mo336(long j) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeLong(j);
@@ -348,7 +348,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final List mo337(long j, int i) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             parcelObtain.writeLong(j);
@@ -371,7 +371,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo338(IBinder iBinder, String str, String str2, String str3, int i) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         Parcel parcelObtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
@@ -417,7 +417,7 @@ public final class q0 implements s0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final String mo345() {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoWindowManagerService");
             this.f278.transact(18, parcelObtain, Obtain, 0);
@@ -438,7 +438,7 @@ public final class q0 implements s0 {
     @Override // top.bienvenido.date_24323.s0
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo347(String str) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoWindowManagerService");
             Obtain.writeString(str);

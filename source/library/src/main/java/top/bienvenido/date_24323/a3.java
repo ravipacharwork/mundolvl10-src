@@ -86,7 +86,7 @@ public final class a3 extends AbstractC0057 {
             objMo393 = s2Var2.mo393(null);
         }
         if (objMo393 != null) {
-            ?? r0 = objMo393;
+            Object r0 = objMo393;
             synchronized (r0) {
                 try {
                     Iterator it = ((Map) r0).values().iterator();

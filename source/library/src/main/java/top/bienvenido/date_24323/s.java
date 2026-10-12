@@ -25,7 +25,7 @@ public final class s implements u {
     @Override // top.bienvenido.date_24323.u
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo168(String str, String str2, String str3, boolean z, String str4) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAppThread");
             Obtain.writeString(str);
@@ -65,7 +65,7 @@ public final class s implements u {
     @Override // top.bienvenido.date_24323.u
     /* JADX INFO: renamed from: 你妈在万人广场卖逼你废物爹不仅不阻止反而跟你妈一起跟天下人民普天同庆你每晚草你妈生龙活虎你妈疼的呲牙咧嘴你妈逼上的阴齿都满足不了你这杂种的狂野性需求啊草你妈 */
     public final void mo171xb7bf1d91(IBinder iBinder) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAppThread");
             Obtain.writeStrongBinder(iBinder);
@@ -82,7 +82,7 @@ public final class s implements u {
     @Override // top.bienvenido.date_24323.u
     /* JADX INFO: renamed from: 你不知道你妈张个大嘴劈个小腿下面还流着咸盐水吗弟弟 */
     public final void mo172() {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAppThread");
             this.f300.transact(6, Obtain, null, 1);
@@ -102,7 +102,7 @@ public final class s implements u {
     /* JADX INFO: renamed from: 我空降你爹葬礼用你妈子宫弹奏一曲dj版求佛为你爹亡灵超度 */
     public final IBinder mo173dj(String str) {
         Parcel parcelObtain = Parcel.obtain();
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             parcelObtain.writeInterfaceToken("MundoAppThread");
             parcelObtain.writeString(str);
@@ -124,7 +124,7 @@ public final class s implements u {
     @Override // top.bienvenido.date_24323.u
     /* JADX INFO: renamed from: 孙立军禁播你妈下体乃是正义之举此举引得无数爱国人士冲进你妈下体一顿打砸从此你妈卖逼也没用好口碑了 */
     public final void mo174(String str) {
-        ?? Obtain = Parcel.obtain();
+        Parcel Obtain = Parcel.obtain();
         try {
             Obtain.writeInterfaceToken("MundoAppThread");
             Obtain.writeString(str);

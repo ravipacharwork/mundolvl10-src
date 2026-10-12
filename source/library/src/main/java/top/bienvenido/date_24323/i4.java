@@ -37,10 +37,10 @@ public abstract class i4 {
             if (binder != null) {
                 binder.linkToDeath(new h4(binder), 0);
                 String strValueOf = String.valueOf(bundle.getInt(Integer.TYPE.getName(), 0));
-                ?? r0 = new Object[2];
+                Object[] r0 = new Object[2];
                 r0[0] = binder;
                 r0[1] = strValueOf;
-                ?? r1 = j4.f182;
+                ArrayList r1 = j4.f182;
                 synchronized (r1) {
                     try {
                         MNative.m687(1001, r0);

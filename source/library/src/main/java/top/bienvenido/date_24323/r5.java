@@ -560,7 +560,7 @@ public final class r5 extends n0 {
                             continue;
                         } else {
                             for (String str2 : listSplit$default) {
-                                ?? r0 = f294;
+                                n9 r0 = f294;
                                 synchronized (r0) {
                                     try {
                                         r0.m388(str2.hashCode());
@@ -911,7 +911,7 @@ public final class r5 extends n0 {
                             continue;
                         } else {
                             for (String str2 : listSplit$default) {
-                                ?? r0 = f294;
+                                n9 r0 = f294;
                                 synchronized (r0) {
                                     try {
                                         r0.m386(str2.hashCode(), providerInfo);

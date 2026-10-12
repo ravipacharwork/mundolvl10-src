@@ -35,7 +35,7 @@ public final class q4 extends h0 {
             return;
         }
         try {
-            ?? r0 = f281;
+            x6 r0 = f281;
             synchronized (r0) {
                 try {
                     r0.m564(uri, 0, iBinder, z);
@@ -56,7 +56,7 @@ public final class q4 extends h0 {
             return;
         }
         try {
-            ?? r0 = f281;
+            x6 r0 = f281;
             synchronized (r0) {
                 try {
                     r0.m562(iBinder);
@@ -85,7 +85,7 @@ public final class q4 extends h0 {
     /* JADX INFO: renamed from: 狂犬疫苗忘了给你妈打不好意思让它到处咬人才会生出你这种上缺脑子下缺逼火葬场都不收的烂骨灰 */
     public final void mo155(Uri uri, IBinder iBinder, boolean z) {
         try {
-            ?? arrayList = new ArrayList();
+            ArrayList arrayList = new ArrayList();
             x6 x6Var = f281;
             synchronized (x6Var) {
                 try {
@@ -95,7 +95,7 @@ public final class q4 extends h0 {
                     throw arrayList;
                 }
             }
-            for (?? r0 : arrayList) {
+            for (Object r0 : arrayList) {
                 try {
                     IContentObserver iContentObserverAsInterface = IContentObserver.Stub.asInterface(r0.f363);
                     boolean z2 = AbstractC0065x6082d607.f505;
