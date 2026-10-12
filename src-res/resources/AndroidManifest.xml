@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="top.bienvenido.mundo"
+    android:installLocation="preferExternal" >
+
+    <uses-sdk android:minSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowNativeHeapPointerTagging="false"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="r" >
+        <property
+            android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY"
+            android:value="true" />
+
+        <provider
+            android:name="top.bienvenido.mundo.supervisor.MundoSupervisorProvider"
+            android:authorities="${applicationId}.service.provider"
+            android:exported="false" />
+
+        <activity android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoIntermediary"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.CHOOSER" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name="top.bienvenido.mundo.FBLoginAbility"
+            android:enabled="true"
+            android:exported="true"
+            android:label="Facebook Login"
+            android:targetActivity="top.bienvenido.mundo.manifest.MundoIntermediary" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="fbconnect" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="cct.com.tencent.ig"
+                    android:scheme="fbconnect" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="cct.com.pubg.imobile"
+                    android:scheme="fbconnect" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106545419" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="imobile1450" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoSplashLauncher"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
+
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB"
+            android:permission="android.permission.BIND_VPN_SERVICE" />
+
+        <receiver
+            android:name="top.bienvenido.mundo.manifest.MundoReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="${applicationId}.mundo.receiver.stub" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB1"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub1"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task1"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB2"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub2"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task2"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB3"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub3"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task3"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB4"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub4"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task4"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB5"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub5"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task5"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB6"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub6"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task6"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB7"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub7"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task7"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB8"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub8"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task8"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB9"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub9"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task9"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB10"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub10"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task10"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB11"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub11"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task11"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB12"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub12"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task12"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB13"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub13"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task13"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB14"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub14"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task14"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB15"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub15"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task15"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB16"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub16"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task16"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB17"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub17"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task17"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB18"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub18"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task18"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB19"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub19"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task19"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB20"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub20"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task20"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB21"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub21"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task21"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB22"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub22"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task22"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB23"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub23"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task23"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB24"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub24"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task24"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB1H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub1"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task1"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB2H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub2"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task2"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB3H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub3"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task3"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB4H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub4"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task4"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB5H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub5"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task5"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB6H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub6"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task6"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB7H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub7"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task7"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB8H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub8"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task8"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB9H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub9"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task9"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB10H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub10"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task10"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB11H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub11"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task11"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB12H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub12"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task12"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB13H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub13"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task13"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB14H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub14"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task14"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB15H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub15"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task15"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB16H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub16"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task16"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB17H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub17"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task17"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB18H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub18"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task18"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB19H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub19"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task19"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB20H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub20"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task20"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB21H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub21"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task21"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB22H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub22"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task22"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB23H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub23"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task23"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+        <activity
+            android:name="top.bienvenido.mundo.manifest.MundoActivity$Companion$STUB24H"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|mcc|mnc|screenLayout|screenSize|uiMode|fontScale|fontWeightAdjustment|smallestScreenSize|density|colorMode|layoutDirection|locale|orientation"
+            android:process=":stub24"
+            android:screenOrientation="sensorLandscape"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity="top.bienvenido.mundo.task24"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            tools:ignore="DiscouragedApi" />
+
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB1"
+            android:authorities="${applicationId}.provider.stub1"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub1"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB2"
+            android:authorities="${applicationId}.provider.stub2"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub2"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB3"
+            android:authorities="${applicationId}.provider.stub3"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub3"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB4"
+            android:authorities="${applicationId}.provider.stub4"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub4"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB5"
+            android:authorities="${applicationId}.provider.stub5"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub5"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB6"
+            android:authorities="${applicationId}.provider.stub6"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub6"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB7"
+            android:authorities="${applicationId}.provider.stub7"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub7"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB8"
+            android:authorities="${applicationId}.provider.stub8"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub8"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB9"
+            android:authorities="${applicationId}.provider.stub9"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub9"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB10"
+            android:authorities="${applicationId}.provider.stub10"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub10"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB11"
+            android:authorities="${applicationId}.provider.stub11"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub11"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB12"
+            android:authorities="${applicationId}.provider.stub12"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub12"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB13"
+            android:authorities="${applicationId}.provider.stub13"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub13"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB14"
+            android:authorities="${applicationId}.provider.stub14"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub14"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB15"
+            android:authorities="${applicationId}.provider.stub15"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub15"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB16"
+            android:authorities="${applicationId}.provider.stub16"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub16"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB17"
+            android:authorities="${applicationId}.provider.stub17"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub17"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB18"
+            android:authorities="${applicationId}.provider.stub18"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub18"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB19"
+            android:authorities="${applicationId}.provider.stub19"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub19"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB20"
+            android:authorities="${applicationId}.provider.stub20"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub20"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB21"
+            android:authorities="${applicationId}.provider.stub21"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub21"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB22"
+            android:authorities="${applicationId}.provider.stub22"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub22"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB23"
+            android:authorities="${applicationId}.provider.stub23"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub23"
+            tools:ignore="ExportedContentProvider" />
+        <provider
+            android:name="top.bienvenido.mundo.manifest.MundoProvider$Companion$STUB24"
+            android:authorities="${applicationId}.provider.stub24"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:process=":stub24"
+            tools:ignore="ExportedContentProvider" />
+
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB1"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub1" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB2"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub2" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB3"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub3" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB4"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub4" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB5"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub5" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB6"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub6" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB7"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub7" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB8"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub8" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB9"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub9" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB10"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub10" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB11"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub11" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB12"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub12" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB13"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub13" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB14"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub14" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB15"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub15" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB16"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub16" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB17"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub17" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB18"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub18" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB19"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub19" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB20"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub20" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB21"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub21" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB22"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub22" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB23"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub23" />
+        <service
+            android:name="top.bienvenido.mundo.manifest.MundoService$Companion$STUB24"
+            android:exported="false"
+            android:foregroundServiceType="phoneCall|mediaPlayback|dataSync|connectedDevice|specialUse|shortService|systemExempted|remoteMessaging|health"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":stub24" />
+    </application>
+
+</manifest>

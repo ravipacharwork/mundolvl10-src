@@ -1,0 +1,5 @@
+artifacts/aar-extracted/
+artifacts/*.log
+artifacts/*.err
+src-res/resources/jni/
+src-res/resources/META-INF/
