@@ -8,6 +8,7 @@ on:
       - ".github/workflows/probe.yml"
       - "ci/ghidra/DefineFunctions.java"
       - "ci/ghidra/DumpRange.java"
+      - "ci/ghidra/ExportFunctions.java"
 
 env:
   SO_PATH: source/library/src/main/jniLibs/arm64-v8a/libxdfw8yegr.so
@@ -41,7 +42,16 @@ jobs:
           "$GHIDRA_HOME/support/analyzeHeadless" "$PWD/ghproj" probe \
             -import "$PWD/$SO_PATH" \
             -scriptPath "$PWD/ci/ghidra" \
-            -postScript DumpRange.java 0x17ff00 0x180200 \
             -postScript DefineFunctions.java \
+            -postScript ExportFunctions.java "$PWD/functions.txt" \
             -postScript DumpRange.java 0x17ff00 0x180200 \
             -deleteProject
+          echo "functions: $(grep -c '^0x' functions.txt)"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: probe-functions
+          path: functions.txt
+          if-no-files-found: warn
+

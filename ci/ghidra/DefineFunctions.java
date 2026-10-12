@@ -58,11 +58,8 @@ public class DefineFunctions extends GhidraScript {
                         }
                         if (f == null) {
                             try {
-                                f = fm.createFunction(null, a, a,
+                                f = fm.createFunction(null, a, new AddressSet(a, a),
                                         SourceType.USER_DEFINED);
-                                if (f != null) {
-                                    f.setBody(new AddressSet(a, a));
-                                }
                             } catch (Exception e) {
                                 if (fails < 15) {
                                     println("fm.createFunction threw at " + a + ": " + e);
